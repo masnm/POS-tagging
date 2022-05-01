@@ -8,7 +8,7 @@ cd POS-tagging
 make # For Linux or POSIX-compliant OS
 python3 src/run.py # For other OS
 ```
-#### Testing with own input
+#### Testing with your own input
 ```sh
 python3 src/run.py
 ```
