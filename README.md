@@ -13,7 +13,7 @@ python3 src/run.py # For other OS
 python3 src/run.py
 ```
 ## Details
-See the README.md file in 'src' folder for Project details
+See the [README.md](https://github.com/masnm/POS-tagging/tree/master/src#readme) file in 'src' folder for Project details
 
 ## License
 MIT
