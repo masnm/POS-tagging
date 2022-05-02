@@ -50,76 +50,76 @@ classDiagram
 		+Obj pronoun_finder
 	}
 
-    class tagset {
-        <<enumeration>>
-        NN = 'Noun'
-        CND = 'Conditional'
-        CNJ = 'Conjunction'
-        POP = 'Postposition'
-        DIS = 'Disjunction'
-        NEG = 'Negative particle'
-        ING = 'Interrogative particle'
-        VF = 'Finite verb'
-        QFNUM = 'Quantifier number'
-        NV = 'Verbal Noun'
-        AV = 'Verbal Adjective'
-        AD = 'Adjective'
-        ADA = 'Adjective of adjective'
-        PP = 'Pronoun'
-        SYM = 'Symbol'
-        VNF = 'Nonfinite verb'
-    }
+	class tagset {
+		<<enumeration>>
+		NN = 'Noun'
+		CND = 'Conditional'
+		CNJ = 'Conjunction'
+		POP = 'Postposition'
+		DIS = 'Disjunction'
+		NEG = 'Negative particle'
+		ING = 'Interrogative particle'
+		VF = 'Finite verb'
+		QFNUM = 'Quantifier number'
+		NV = 'Verbal Noun'
+		AV = 'Verbal Adjective'
+		AD = 'Adjective'
+		ADA = 'Adjective of adjective'
+		PP = 'Pronoun'
+		SYM = 'Symbol'
+		VNF = 'Nonfinite verb'
+	}
 ```
 
 ### FlowChar for the Project
 ```mermaid
 flowchart TD
-    ST([Start])
-    
-    subgraph Sentence_Scanner
-        B[/Sentence From Console/]
-        C[[Sentence_Scanner]]
-        B --> C
-    end
+	ST([Start])
 
-    subgraph Word_Seperator
-        D[[Word_Seperator]]
-        D0[[seperate_words]]
-        D --> D0
-    end
+	subgraph Sentence_Scanner
+		B[/Sentence From Console/]
+		C[[Sentence_Scanner]]
+		B --> C
+	end
+	
+	subgraph Word_Seperator
+		D[[Word_Seperator]]
+		D0[[seperate_words]]
+		D --> D0
+	end
 
-    subgraph Word_Pos_List_Structure
-        E[[Word_Pos_List_Structure]]
-        E0[[create_word_pos_list]]
-        E1[[Word_POS_List]]
-        E1 --> E0
-        E --> E0
-    end
+	subgraph Word_Pos_List_Structure
+		E[[Word_Pos_List_Structure]]
+		E0[[create_word_pos_list]]
+		E1[[Word_POS_List]]
+		E1 --> E0
+		E --> E0
+	end
 
-    subgraph Pronoun_Finder
-        F[[Pronoun_Finder]]
-        F0[[init_pronouns]]
-        F1[[mark_pronouns]]
-        F --> F0
-        F --> F1
-    end
+	subgraph Pronoun_Finder
+		F[[Pronoun_Finder]]
+		F0[[init_pronouns]]
+		F1[[mark_pronouns]]
+		F --> F0
+		F --> F1
+	end
 
-    subgraph Run
-        subgraph Run_Elements
-            AA[[Run::Sentence]]
-            AB[[Run::word_seperator]]
-            AC[[Run::word_pos_list]]
-            AD[[Run::pronoun_finder]]
-        end
-    end
+	subgraph Run
+		subgraph Run_Elements
+			AA[[Run::Sentence]]
+			AB[[Run::word_seperator]]
+			AC[[Run::word_pos_list]]
+			AD[[Run::pronoun_finder]]
+		end
+	end
 
-    ST --> Run
-        
-    Sentence_Scanner -- Object --> AA
-    AA -- Sentence.sentence --> Word_Seperator
-    Word_Seperator -- Object --> AB
-    AB -- word_seperator.words --> Word_Pos_List_Structure
-    Word_Pos_List_Structure -- Object --> AC
-    AC -- word_pos_list.word_pos --> Pronoun_Finder
-    Pronoun_Finder -- Object --> AD
+	ST --> Run
+
+	Sentence_Scanner -- Object --> AA
+	AA -- Sentence.sentence --> Word_Seperator
+	Word_Seperator -- Object --> AB
+	AB -- word_seperator.words --> Word_Pos_List_Structure
+	Word_Pos_List_Structure -- Object --> AC
+	AC -- word_pos_list.word_pos --> Pronoun_Finder
+	Pronoun_Finder -- Object --> AD
 ```
