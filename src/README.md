@@ -39,6 +39,7 @@ classDiagram
 		mark_pronouns ()
 		__repr__ ()
 	}
+
 	Sentence_Scanner --> Run : Sentence
 	Run --> Word_Seperator : Sentence.sentence
 	Word_Seperator --> Run : word_seperator
@@ -47,4 +48,11 @@ classDiagram
 	Word_Pos_List_Structure --> Run : word_pos_list
 	Run --> Pronoun_Finder : word_pos_list.word_pos
 	Pronoun_Finder --> Run : pronoun_finder
+
+	class Run {
+		Obj Sentence
+		Obj word_seperator
+		Obj word_pos_list
+		Obj pronoun_finder
+	}
 ```
