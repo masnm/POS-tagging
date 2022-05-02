@@ -2,7 +2,7 @@ from Sentence_Scanner.Sentence_Scanner import *
 from Word_Seperator.Word_Seperator import *
 from Word_Pos_List_Structure.Word_Pos_List_Structure import *
 from Pronoun_Finder.Pronoun_Finder import *
-from Tagset.Tagset import *
+from Conjunction_Finder.Conjunction_Finder import *
 
 # Taking bangla sentence as input
 Sentence = Sentence_Scanner ()
@@ -20,4 +20,8 @@ word_pos_list = Word_Pos_List_Structure ( word_seperator.words )
 
 # Pronoun finder class
 pronoun_finder = Pronoun_Finder ( word_pos_list.word_pos )
-print ( pronoun_finder )
+# print ( pronoun_finder )
+
+# Conjunction finder class
+conjunction_finder = Conjunction_Finder ( pronoun_finder.word_pos )
+print ( conjunction_finder )

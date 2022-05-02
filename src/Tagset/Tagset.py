@@ -15,5 +15,6 @@ class Tagset ( Enum ):
     AD = 'Adjective'
     ADA = 'Adjective of adjective'
     PP = 'Pronoun'
+    PPP = 'Possesive Pronoun'
     SYM = 'Symbol'
     VNF = 'Nonfinite verb'

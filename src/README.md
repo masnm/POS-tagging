@@ -40,6 +40,15 @@ classDiagram
 		+mark_pronouns ()
 		+__repr__ ()
 	}
+	class Conjunction_Finder {
+		+str conjunction_lst_file
+		+List[] conjunctions
+		+List[] word_pos
+		+__init__ ():
+		+init_conjunctions ():
+		+mark_conjunctions ():
+		+__repr__ ():
+	}
 
 	Word_POS_List --* Word_Pos_List_Structure
 
@@ -66,6 +75,7 @@ classDiagram
 		AD = 'Adjective'
 		ADA = 'Adjective of adjective'
 		PP = 'Pronoun'
+		PPP = 'Possesive Pronoun'
 		SYM = 'Symbol'
 		VNF = 'Nonfinite verb'
 	}
@@ -104,12 +114,21 @@ flowchart TD
 		F --> F1
 	end
 
+	subgraph Conjunction_Finder
+		G[[Conjunction_Finder]]
+		G0[[init_conjunctions]]
+		G1[[mark_conjunctions]]
+		G --> G0
+		G --> G1
+	end
+
 	subgraph Run
 		subgraph Run_Elements
 			AA[[Run::Sentence]]
 			AB[[Run::word_seperator]]
 			AC[[Run::word_pos_list]]
 			AD[[Run::pronoun_finder]]
+			AE[[Run::conjunction_finder]]
 		end
 	end
 
@@ -122,4 +141,6 @@ flowchart TD
 	Word_Pos_List_Structure -- Object --> AC
 	AC -- word_pos_list.word_pos --> Pronoun_Finder
 	Pronoun_Finder -- Object --> AD
+	AD -- pronoun_finder.word_pos --> Conjunction_Finder
+	Conjunction_Finder -- Object --> AE
 ```
