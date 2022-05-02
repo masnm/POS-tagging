@@ -74,33 +74,52 @@ classDiagram
 ### FlowChar for the Project
 ```mermaid
 flowchart TD
-    AA[[Run::Sentence]]
-    AB[[Run::word_seperator]]
-    AC[[Run::word_pos_list]]
-    AD[[Run::pronoun_finder]]
+    ST([Start])
+    
+    subgraph Sentence_Scanner
+        B[/Sentence From Console/]
+        C[[Sentence_Scanner]]
+        B --> C
+    end
 
-    B[/Sentence From Console/]
+    subgraph Word_Seperator
+        D[[Word_Seperator]]
+        D0[[seperate_words]]
+        D --> D0
+    end
 
-    C[[Sentence_Scanner]]
-    D[[Word_Seperator]]
-    E[[Word_Pos_List_Structure]]
-    F[[Pronoun_Finder]]
+    subgraph Word_Pos_List_Structure
+        E[[Word_Pos_List_Structure]]
+        E0[[create_word_pos_list]]
+        E1[[Word_POS_List]]
+        E1 --> E0
+        E --> E0
+    end
+
+    subgraph Pronoun_Finder
+        F[[Pronoun_Finder]]
+        F0[[init_pronouns]]
+        F1[[mark_pronouns]]
+        F --> F0
+        F --> F1
+    end
 
     subgraph Run
         subgraph Run_Elements
-            AA
-            AB
-            AC
-            AD
+            AA[[Run::Sentence]]
+            AB[[Run::word_seperator]]
+            AC[[Run::word_pos_list]]
+            AD[[Run::pronoun_finder]]
         end
     end
+
+    ST --> Run
         
-    B --> C
-    C -- Object --> AA
-    AA -- Sentence.sentence --> D
-    D -- Object --> AB
-    AB -- word_seperator.words --> E
-    E -- Object --> AC
-    AC -- word_pos_list.word_pos --> F
-    F -- Object --> AD
+    Sentence_Scanner -- Object --> AA
+    AA -- Sentence.sentence --> Word_Seperator
+    Word_Seperator -- Object --> AB
+    AB -- word_seperator.words --> Word_Pos_List_Structure
+    Word_Pos_List_Structure -- Object --> AC
+    AC -- word_pos_list.word_pos --> Pronoun_Finder
+    Pronoun_Finder -- Object --> AD
 ```
