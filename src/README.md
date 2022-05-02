@@ -72,3 +72,35 @@ classDiagram
 ```
 
 ### FlowChar for the Project
+```mermaid
+flowchart TD
+    AA[[Run::Sentence]]
+    AB[[Run::word_seperator]]
+    AC[[Run::word_pos_list]]
+    AD[[Run::pronoun_finder]]
+
+    B[/Sentence From Console/]
+
+    C[[Sentence_Scanner]]
+    D[[Word_Seperator]]
+    E[[Word_Pos_List_Structure]]
+    F[[Pronoun_Finder]]
+
+    subgraph Run
+        subgraph Run_Elements
+            AA
+            AB
+            AC
+            AD
+        end
+    end
+        
+    B --> C
+    C -- Object --> AA
+    AA -- Sentence.sentence --> D
+    D -- Object --> AB
+    AB -- word_seperator.words --> E
+    E -- Object --> AC
+    AC -- word_pos_list.word_pos --> F
+    F -- Object --> AD
+```
