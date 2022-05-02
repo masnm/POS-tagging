@@ -57,6 +57,7 @@ classDiagram
 		+Obj word_seperator
 		+Obj word_pos_list
 		+Obj pronoun_finder
+		+Obj conjunction_finder
 	}
 
 	class tagset {
