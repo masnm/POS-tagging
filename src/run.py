@@ -3,6 +3,7 @@ from Word_Seperator.Word_Seperator import *
 from Word_Pos_List_Structure.Word_Pos_List_Structure import *
 from Pronoun_Finder.Pronoun_Finder import *
 from Conjunction_Finder.Conjunction_Finder import *
+from Conditional_Finder.Conditional_Finder import *
 
 class Run:
 
@@ -11,6 +12,7 @@ class Run:
     word_pos_list:Word_Pos_List_Structure
     pronoun_finder:Pronoun_Finder
     conjunction_finder:Conjunction_Finder
+    conditional_finder:Conditional_Finder
 
     def __init__ ( self ):
         pass
@@ -26,7 +28,9 @@ class Run:
         pronoun_finder = Pronoun_Finder ( word_pos_list.word_pos )
         # Conjunction finder class
         conjunction_finder = Conjunction_Finder ( pronoun_finder.word_pos )
-        print ( conjunction_finder )
+        # Conditional finder class
+        conditional_finder = Conditional_Finder ( conjunction_finder.word_pos )
+        print ( conditional_finder )
 
 if __name__ == "__main__":
     run = Run ()

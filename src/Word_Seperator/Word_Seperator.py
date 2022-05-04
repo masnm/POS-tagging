@@ -1,6 +1,6 @@
-import csv
+from CSV_File_To_List.CSV_File_To_List import CSV_File_To_List
 
-class Word_Seperator:
+class Word_Seperator ( CSV_File_To_List ):
 
     filename = "src/CSV_files/punctuation_mark.csv"
     sentence = ""
@@ -8,17 +8,9 @@ class Word_Seperator:
     punctuations = []
 
     def __init__ ( self, sentence:str ):
-        self.init_punctuations ()
         self.sentence = sentence
+        self.punctuations = self.file_to_list ( self.filename, "mark" )
         self.seperate_words ()
-
-    def init_punctuations ( self ):
-        items = []
-        with open ( self.filename, 'r' ) as f:
-            reader = csv.DictReader ( f )
-            items = list ( reader )
-        for item in items:
-            self.punctuations.append ( item.get ( 'mark' ) );
 
     def seperate_words ( self ):
         word = ""

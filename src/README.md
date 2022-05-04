@@ -19,6 +19,8 @@ classDiagram
 		+seperate_words ()
 		+__repr__ ()
 	}
+	Word_Seperator <|-- CSV_File_To_List
+
 	class Word_POS_List {
 		+str word
 		+List[] pos_list
@@ -40,6 +42,8 @@ classDiagram
 		+mark_pronouns ()
 		+__repr__ ()
 	}
+	Pronoun_Finder <|-- CSV_File_To_List
+
 	class Conjunction_Finder {
 		+str conjunction_lst_file
 		+List[] conjunctions
@@ -49,6 +53,7 @@ classDiagram
 		+mark_conjunctions ():
 		+__repr__ ():
 	}
+	Conjunction_Finder <|-- CSV_File_To_List
 
 	Word_POS_List --* Word_Pos_List_Structure
 
@@ -58,6 +63,11 @@ classDiagram
 		+Obj word_pos_list
 		+Obj pronoun_finder
 		+Obj conjunction_finder
+	}
+
+	class CSV_File_To_List {
+		+__init__ ()
+		+file_to_list ():
 	}
 
 	class tagset {

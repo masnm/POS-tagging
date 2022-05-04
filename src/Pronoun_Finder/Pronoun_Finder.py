@@ -1,9 +1,8 @@
-import csv
-from bisect import bisect_left
+from CSV_File_To_List.CSV_File_To_List import CSV_File_To_List
 from Word_Pos_List_Structure.Word_Pos_List_Structure import Word_POS_List
 from Tagset.Tagset import Tagset
 
-class Pronoun_Finder:
+class Pronoun_Finder ( CSV_File_To_List ):
 
     filename = "src/CSV_files/pronoun_list.csv"
     prefix_file = "src/CSV_files/pronoun_prefix_list.csv"
@@ -16,41 +15,11 @@ class Pronoun_Finder:
 
     def __init__ ( self, word_pos:Word_POS_List ):
         self.word_pos = word_pos
-        self.init_pronouns ()
-        self.init_pronoun_prefixes ()
-        self.init_possessive_pronouns ()
+        self.pronouns = self.file_to_list ( self.filename, "pronoun" )
+        self.prefixes = self.file_to_list ( self.prefix_file, "prefix" )
+        self.possessive_pronouns = self.file_to_list ( self.singular_pp_file, "singular" )
+        self.possessive_pronouns += ( self.file_to_list ( self.plural_pp_file, "plural" ) )
         self.mark_pronouns ()
-
-    def init_pronouns ( self ):
-        items = []
-        with open ( self.filename, 'r' ) as f:
-            reader = csv.DictReader ( f )
-            items = list ( reader )
-        for item in items:
-            self.pronouns.append ( item.get ( 'pronoun' ) )
-        self.pronouns.sort ()
-
-    def init_pronoun_prefixes ( self ):
-        items = []
-        with open ( self.prefix_file, 'r' ) as f:
-            reader = csv.DictReader ( f )
-            items = list ( reader )
-        for item in items:
-            self.prefixes.append ( item.get ( 'prefix' ) )
-        self.prefixes.sort ()
-
-    def init_possessive_pronouns ( self ):
-        items = []
-        with open ( self.singular_pp_file, 'r' ) as f:
-            reader = csv.DictReader ( f )
-            items = list ( reader )
-        for item in items:
-            self.possessive_pronouns.append ( item.get ( 'singular' ) )
-        with open ( self.plural_pp_file, 'r' ) as f:
-            reader = csv.DictReader ( f )
-            items = list ( reader )
-        for item in items:
-            self.possessive_pronouns.append ( item.get ( 'plural' ) )
 
     def mark_pronouns ( self ):
         for item in self.word_pos:

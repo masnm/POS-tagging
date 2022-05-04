@@ -1,8 +1,8 @@
-import csv
+from CSV_File_To_List.CSV_File_To_List import CSV_File_To_List
 from Word_Pos_List_Structure.Word_Pos_List_Structure import Word_POS_List
 from Tagset.Tagset import Tagset
 
-class Conjunction_Finder:
+class Conjunction_Finder ( CSV_File_To_List ):
 
     conjunction_lst_file = "src/CSV_files/conjunction_list.csv"
     conjunctions = []
@@ -10,23 +10,14 @@ class Conjunction_Finder:
 
     def __init__ ( self, word_pos:Word_POS_List ):
         self.word_pos = word_pos
-        self.init_conjunctions ()
+        self.conjunctions = self.file_to_list ( self.conjunction_lst_file, "conjunction" )
         self.mark_conjunctions ()
-
-    def init_conjunctions ( self ):
-        items = []
-        with open ( self.conjunction_lst_file, 'r' ) as f:
-            reader = csv.DictReader ( f )
-            items = list ( reader )
-        for item in items:
-            self.conjunctions.append ( item.get ( 'conjunction' ) )
 
     def mark_conjunctions ( self ):
         for item in self.word_pos:
             for conjunction in self.conjunctions:
                 if item.word == conjunction:
                     item.pos_list.append ( Tagset.CNJ )
-                    print ( "Conjunction found" )
 
     def __repr__ ( self ):
         return str (
