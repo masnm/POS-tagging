@@ -19,7 +19,7 @@ classDiagram
 		+seperate_words ()
 		+__repr__ ()
 	}
-	Word_Seperator <|-- CSV_File_To_List
+	CSV_File_To_List <|-- Word_Seperator
 
 	class Word_POS_List {
 		+str word
@@ -42,7 +42,7 @@ classDiagram
 		+mark_pronouns ()
 		+__repr__ ()
 	}
-	Pronoun_Finder <|-- CSV_File_To_List
+	CSV_File_To_List <|-- Pronoun_Finder
 
 	class Conjunction_Finder {
 		+str conjunction_lst_file
@@ -53,7 +53,7 @@ classDiagram
 		+mark_conjunctions ():
 		+__repr__ ():
 	}
-	Conjunction_Finder <|-- CSV_File_To_List
+	CSV_File_To_List <|-- Conjunction_Finder
 
 	Word_POS_List --* Word_Pos_List_Structure
 
@@ -133,6 +133,14 @@ flowchart TD
 		G --> G1
 	end
 
+	subgraph Conditional_Finder
+		H[[Conditional_Finder]]
+		H0[[init_conditionals]]
+		H1[[mark_conditionals]]
+		H --> H0
+		H --> H1
+	end
+
 	subgraph Run
 		subgraph Run_Elements
 			AA[[Run::Sentence]]
@@ -140,6 +148,7 @@ flowchart TD
 			AC[[Run::word_pos_list]]
 			AD[[Run::pronoun_finder]]
 			AE[[Run::conjunction_finder]]
+			AF[[Run::conditional_finder]]
 		end
 	end
 
@@ -154,4 +163,6 @@ flowchart TD
 	Pronoun_Finder -- Object --> AD
 	AD -- pronoun_finder.word_pos --> Conjunction_Finder
 	Conjunction_Finder -- Object --> AE
+	AE -- conjunction_finder.word_pos --> Conditional_Finder
+	Conditional_Finder -- Object --> AF
 ```
