@@ -55,6 +55,26 @@ classDiagram
 	}
 	CSV_File_To_List <|-- Conjunction_Finder
 
+	class Interrogative_Finder {
+		+str interrogative_lst_file
+		+List[] interrogatives
+		+List[] word_pos
+		+__init__ ():
+		+mark_interrogatives ():
+		+__repr__ ():
+	}
+	CSV_File_To_List <|-- Interrogative_Finder
+
+	class Negative_Finder {
+		str negative_lst_file
+		List[] negatives
+		List[] word_pos
+			+__init__ ():
+			+mark_negatives ():
+			+__repr__ ():
+	}
+	CSV_File_To_List <|-- Negative_Finder
+
 	Word_POS_List --* Word_Pos_List_Structure
 
 	class Run {
@@ -119,26 +139,32 @@ flowchart TD
 
 	subgraph Pronoun_Finder
 		F[[Pronoun_Finder]]
-		F0[[init_pronouns]]
 		F1[[mark_pronouns]]
-		F --> F0
 		F --> F1
 	end
 
 	subgraph Conjunction_Finder
 		G[[Conjunction_Finder]]
-		G0[[init_conjunctions]]
 		G1[[mark_conjunctions]]
-		G --> G0
 		G --> G1
 	end
 
 	subgraph Conditional_Finder
 		H[[Conditional_Finder]]
-		H0[[init_conditionals]]
 		H1[[mark_conditionals]]
-		H --> H0
 		H --> H1
+	end
+
+	subgraph Interrogative_Finder
+		I[[Interrogative_Finder]]
+		I1[[mark_interrogatives]]
+		I --> I1
+	end
+
+	subgraph Negative_Finder
+		NF[[Negative_Finder]]
+		NF1[[mark_negatives]]
+		NF --> NF1
 	end
 
 	subgraph Run
@@ -149,6 +175,8 @@ flowchart TD
 			AD[[Run::pronoun_finder]]
 			AE[[Run::conjunction_finder]]
 			AF[[Run::conditional_finder]]
+			AG[[Run::interrogative_finder]]
+			AH[[Run::negative_finder]]
 		end
 	end
 
@@ -165,4 +193,8 @@ flowchart TD
 	Conjunction_Finder -- Object --> AE
 	AE -- conjunction_finder.word_pos --> Conditional_Finder
 	Conditional_Finder -- Object --> AF
+	AF -- conditional_finder.word_pos --> Interrogative_Finder
+	Interrogative_Finder -- Object --> AG
+	AG -- interrogative_finder.word_pos --> Negative_Finder
+	Negative_Finder -- Object --> AH
 ```

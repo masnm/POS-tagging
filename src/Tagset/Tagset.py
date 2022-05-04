@@ -8,6 +8,7 @@ class Tagset ( Enum ):
     DIS = 'Disjunction'
     NEG = 'Negative particle'
     ING = 'Interrogative particle'
+    INT = 'Interjection'
     VF = 'Finite verb'
     QFNUM = 'Quantifier number'
     NV = 'Verbal Noun'
