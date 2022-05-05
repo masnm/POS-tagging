@@ -3,6 +3,14 @@
 ### Class Details
 ```mermaid
 classDiagram
+	class Run {
+		+Obj Sentence
+		+Obj word_seperator
+		+Obj word_pos_list
+		+Obj pronoun_finder
+		+Obj conjunction_finder
+	}
+
 	class Sentence_Scanner {
 		+str sentence
 		+__init__ ()
@@ -43,6 +51,7 @@ classDiagram
 		+__repr__ ()
 	}
 	CSV_File_To_List <|-- Pronoun_Finder
+	Tag_Using_Word_List <|-- Pronoun_Finder
 
 	class Conjunction_Finder {
 		+str conjunction_lst_file
@@ -54,6 +63,7 @@ classDiagram
 		+__repr__ ():
 	}
 	CSV_File_To_List <|-- Conjunction_Finder
+	Tag_Using_Word_List <|-- Conjunction_Finder
 
 	class Interrogative_Finder {
 		+str interrogative_lst_file
@@ -64,25 +74,25 @@ classDiagram
 		+__repr__ ():
 	}
 	CSV_File_To_List <|-- Interrogative_Finder
+	Tag_Using_Word_List <|-- Interrogative_Finder
 
 	class Negative_Finder {
 		str negative_lst_file
 		List[] negatives
 		List[] word_pos
-			+__init__ ():
-			+mark_negatives ():
-			+__repr__ ():
+		+__init__ ():
+		+mark_negatives ():
+		+__repr__ ():
 	}
 	CSV_File_To_List <|-- Negative_Finder
+	Tag_Using_Word_List <|-- Negative_Finder
 
 	Word_POS_List --* Word_Pos_List_Structure
 
-	class Run {
-		+Obj Sentence
-		+Obj word_seperator
-		+Obj word_pos_list
-		+Obj pronoun_finder
-		+Obj conjunction_finder
+
+	class Tag_Using_Word_List {
+		+__init__ ():
+		+tag_using_word_list ():
 	}
 
 	class CSV_File_To_List {

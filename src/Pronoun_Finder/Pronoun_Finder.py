@@ -1,8 +1,9 @@
 from CSV_File_To_List.CSV_File_To_List import CSV_File_To_List
+from Tag_Using_Word_List.Tag_Using_Word_List import Tag_Using_Word_List
 from Word_Pos_List_Structure.Word_Pos_List_Structure import Word_POS_List
 from Tagset.Tagset import Tagset
 
-class Pronoun_Finder ( CSV_File_To_List ):
+class Pronoun_Finder ( CSV_File_To_List, Tag_Using_Word_List ):
 
     filename = "src/CSV_files/pronoun_list.csv"
     prefix_file = "src/CSV_files/pronoun_prefix_list.csv"
@@ -22,11 +23,10 @@ class Pronoun_Finder ( CSV_File_To_List ):
         self.mark_pronouns ()
 
     def mark_pronouns ( self ):
+        self.tag_using_word_list ( self.pronouns, Tagset.PP )
         for item in self.word_pos:
             # Checking for a pronoun
             for pronoun in self.pronouns:
-                if pronoun == item.word:
-                    item.pos_list.append ( Tagset.PP )
                 for prefix in self.prefixes:
                     if pronoun + prefix == item.word:
                         item.pos_list.append ( Tagset.PP )
