@@ -7,6 +7,7 @@ from Conditional_Finder.Conditional_Finder import Conditional_Finder
 from Interjection_Finder.Interjection_Finder import Interjection_Finder
 from Interrogative_Finder.Interrogative_Finder import Interrogative_Finder
 from Negative_Finder.Negative_Finder import Negative_Finder
+from Verb_Finder.Verb_Finder import Verb_Finder
 
 class Run:
 
@@ -17,6 +18,7 @@ class Run:
     conjunction_finder:Conjunction_Finder
     conditional_finder:Conditional_Finder
     interjection_finder:Interjection_Finder
+    verb_finder:Verb_Finder
 
     def __init__ ( self ):
         pass
@@ -40,7 +42,9 @@ class Run:
         interrogative_finder = Interrogative_Finder ( interjection_finder.word_pos )
         # Negative finder class
         negative_finder = Negative_Finder ( interrogative_finder.word_pos )
-        print ( negative_finder )
+        # Verb finder class
+        verb_finder = Verb_Finder ( negative_finder.word_pos )
+        print ( verb_finder )
 
 if __name__ == "__main__":
     run = Run ()
