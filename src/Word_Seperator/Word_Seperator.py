@@ -22,6 +22,7 @@ class Word_Seperator ( CSV_File_To_List ):
                     break
             if is_puncuation:
                 if word:
+                    word.replace ( " ", "" )
                     self.words.append ( word )
                 word = ""
                 is_puncuation=False

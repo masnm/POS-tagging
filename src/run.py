@@ -8,6 +8,10 @@ from Interjection_Finder.Interjection_Finder import Interjection_Finder
 from Interrogative_Finder.Interrogative_Finder import Interrogative_Finder
 from Negative_Finder.Negative_Finder import Negative_Finder
 from Verb_Finder.Verb_Finder import Verb_Finder
+from Onusorgu_Finder.Onusorgu_Finder import Onusorgu_Finder
+from Degree_Finder.Degree_Finder import Degree_Finder
+from Adjective_Of_Adjective_Finder.Adjective_Of_Adjective_Finder import Adjective_Of_Adjective_Finder
+from Adjective_Finder.Adjective_Finder import Adjective_Finder
 
 class Run:
 
@@ -19,13 +23,17 @@ class Run:
     conditional_finder:Conditional_Finder
     interjection_finder:Interjection_Finder
     verb_finder:Verb_Finder
+    onusorgu_finder:Onusorgu_Finder
+    degree_finder:Degree_Finder
+    adjective_of_adjective_finder:Adjective_Of_Adjective_Finder
+    adjective_finder:Adjective_Finder
 
     def __init__ ( self ):
         pass
 
-    def start ( self ):
+    def start ( self, line:str ):
         # Taking bangla sentence as input
-        Sentence = Sentence_Scanner ()
+        Sentence = Sentence_Scanner ( line )
         # Seperate the words into a list
         word_seperator = Word_Seperator ( Sentence.sentence )
         # Creating the struct with word and pos list
@@ -43,9 +51,20 @@ class Run:
         # Negative finder class
         negative_finder = Negative_Finder ( interrogative_finder.word_pos )
         # Verb finder class
+        ## TODO: Verb finder in not implemented yet
         verb_finder = Verb_Finder ( negative_finder.word_pos )
-        print ( verb_finder )
+        # Onusorgu finder class
+        onusorgu_finder = Onusorgu_Finder ( verb_finder.word_pos )
+        # Degree finder class
+        degree_finder = Degree_Finder ( onusorgu_finder.word_pos )
+        # Adjective of Adjective finder class
+        adjective_of_adjective_finder = Adjective_Of_Adjective_Finder ( degree_finder.word_pos )
+        # Ajdective finder class
+        adjective_finder = Adjective_Finder ( adjective_of_adjective_finder.word_pos )
+        print ( adjective_finder )
 
 if __name__ == "__main__":
     run = Run ()
-    run.start ()
+    with open ( 'test_inputs/run_input' ) as openfileobj:
+        for line in openfileobj:
+            run.start ( line );
